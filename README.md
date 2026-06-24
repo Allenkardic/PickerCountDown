@@ -1,6 +1,6 @@
-# Welcome to your Expo app 👋
+# PickerCountDownCard
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+An Expo app that displays a fantasy draft pick countdown card synced to server time.
 
 ## Get started
 
@@ -23,17 +23,30 @@ In the output, you'll find options to open the app in a
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Implementation
 
-## Get a fresh project
+The pick countdown UI is rendered on the **Home** tab (first tab in the app).
 
-When you're ready, run:
+| What | File path |
+| --- | --- |
+| Screen (Home tab) | [`app/(tabs)/index.tsx`](app/(tabs)/index.tsx) |
+| Tab layout (Home / Explore) | [`app/(tabs)/_layout.tsx`](app/(tabs)/_layout.tsx) |
+| Countdown card component | [`components/PickerCountDown.tsx`](components/PickerCountDown.tsx) |
+| Mock API, types & countdown helpers | [`constants/CountDownInterfaces.ts`](constants/CountDownInterfaces.ts) |
 
-```bash
-npm run reset-project
+### What each file does
+
+- **`app/(tabs)/index.tsx`** — Home screen. Renders `<PickerCountDown />` below the welcome header.
+- **`components/PickerCountDown.tsx`** — Main UI: fetch loading/error/success, active/warning/expired countdown states, server-time sync, and the **Start** button to reset after a cycle ends.
+- **`constants/CountDownInterfaces.ts`** — Mock `fetchPickState()` API (~500ms delay), pick/deadline types, and helpers for server offset, remaining time, and countdown formatting (`mm:ss`).
+
+### Release build (Android)
+
+Release APK output:
+
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+android/app/build/outputs/apk/release/Pickercountdown.apk
+```
 
 ## Learn more
 
